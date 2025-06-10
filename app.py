@@ -14,7 +14,7 @@ if f1 is not None:
     st.write("file_name")
     df=pd.read_excel(file_name)
 else:
-    os.chdir(r"C:\Users\sky\Desktop\web dev\python")   
+    
     df=pd.read_excel("super.xls")
     col1, col2 = st.columns((2))
 df["Order Date"] = pd.to_datetime(df["Order Date"])
