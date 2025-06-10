@@ -13,14 +13,19 @@ st.markdown("<style>div.block-container{padding-top:2rem;}</style>", unsafe_allo
 
 # File Upload
 f1 = st.file_uploader(":file_folder: Upload File", type=["csv", "txt", "xlsx", "xls"])
+
 if f1 is not None:
-    file_ext = os.path.splitext(f1.name)[1]
-    if file_ext == '.csv' or file_ext == '.txt':
+    if f1.name.endswith('.csv') or f1.name.endswith('.txt'):
         df = pd.read_csv(f1)
     else:
         df = pd.read_excel(f1)
 else:
-    df = pd.read_excel("super.xls")  # default fallback file
+    try:
+        df = pd.read_excel("super.xls")
+    except FileNotFoundError:
+        st.error("Default file 'super.xls' not found. Please upload a file to continue.")
+        st.stop()
+
 
 # Order Date Handling
 df["Order Date"] = pd.to_datetime(df["Order Date"])
