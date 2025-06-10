@@ -12,7 +12,7 @@ f1=st.file_uploader(":file_upload: upload  file ",type=(["csv","txt","xlsx","xls
 if f1 is not None:
     file_name=f1.name
     st.write("file_name")
-    df=pd.read_excel(file_name)
+    df=pd.read_csv(file_name)
 else:
     
     df=pd.read_excel("super.xls")
